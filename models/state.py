@@ -18,6 +18,6 @@ class State(BaseModel):
         from models import storage
 
         city_inst = [inst for inst in storage.all().values()
-                if isinstance(inst, City)]
+                     if isinstance(inst, City)]
         result = [cities for cities in city_inst if cities.state_id == self.id]
         return result
