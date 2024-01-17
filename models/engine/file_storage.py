@@ -4,12 +4,13 @@ import json
 import os
 import shlex
 
+
 class FileStorage():
     """ class FileStorage"""
     __file_path = "file.json"
     __objects = {}
 
-        def all(self, cls=None):
+    def all(self, cls=None):
         """returns a dictionary
         Return:
             returns a dictionary of __object
@@ -63,10 +64,10 @@ class FileStorage():
                 new = json.load(file)
                 for key, obj_dict in new.items():
                     get_class = obj_dict.get('__class__')
-                    #get_class = get_class.strip()
-                    #obj_class = cls_dic[get_class]
-                    #obj = obj_class(**obj_dict)
-                    #self.new(obj)
+                    # get_class = get_class.strip()
+                    # obj_class = cls_dic[get_class]
+                    # obj = obj_class(**obj_dict)
+                    # self.new(obj)
                     if get_class:
                         get_class = get_class.strip()
                         obj_class = cls_dic.get(get_class)
@@ -74,7 +75,8 @@ class FileStorage():
                             obj = obj_class(**obj_dict)
                             self.new(obj)
                         else:
-                            print(f"Class not found in cls_dic for key: {get_class}")
+                            print("Class not found in cls_dic for key: {}"
+                                  .format(get_class))
                     else:
                         print("'__class__' key not found in obj_dict")
 
