@@ -4,7 +4,7 @@
     New engine for database storage
 """
 from sqlalchemy import create_engine
-from sqlalchemy.ext.delcarative import declarative_base
+from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, scoped_session
 from os import getenv
 from models.base_model import Base
