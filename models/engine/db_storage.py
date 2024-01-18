@@ -15,6 +15,10 @@ from models.place import Place
 from models.review import Review
 from models.amenity import Amenity
 
+all_classes = {'State': State, 'City': City,
+               'User': User, 'Place': Place,
+               'Review': Review, 'Amenity': Amenity}
+
 
 class DBStorage():
     """ This class for the database storage """
@@ -35,27 +39,24 @@ class DBStorage():
         if environ == 'test':
             Base.metadata.drop_all(self.__engine)
 
+
     def all(self, cls=None):
-        """returns a dictionary
-        Return:
-            returns a dictionary of __object
+        """Query and return all objects by class/generally
+        Return: dictionary (<class-name>.<object-id>: <obj>)
         """
-        dic = {}
+        obj_dict = {}
+
         if cls:
-            if type(cls) is str:
-                cls = eval(cls)
-            query = self.__session.query(cls)
-            for elem in query:
-                key = "{}.{}".format(type(elem).__name__, elem.id)
-                dic[key] = elem
+            for row in self.__session.query(cls).all():
+                # populate dict with objects from storage
+                obj_dict.update({'{}.{}'.
+                                format(type(cls).__name__, row.id,): row})
         else:
-            lista = [State, City, User, Place, Review, Amenity]
-            for clase in lista:
-                query = self.__session.query(clase)
-                for elem in query:
-                    key = "{}.{}".format(type(elem).__name__, elem.id)
-                    dic[key] = elem
-        return (dic)
+            for key, val in all_classes.items():
+                for row in self.__session.query(val):
+                    obj_dict.update({'{}.{}'.
+                                    format(type(row).__name__, row.id,): row})
+        return obj_dict
 
     def new(self, obj):
         """add a new element in the table
