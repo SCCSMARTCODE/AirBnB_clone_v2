@@ -2,9 +2,7 @@
 """ Console Module """
 import cmd
 import sys
-from models.base_model import BaseModel, Base
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy import create_engine
+from models.base_model import BaseModel
 from models.__init__ import storage
 from models.user import User
 from models.place import Place
@@ -123,9 +121,6 @@ class HBNBCommand(cmd.Cmd):
         except NameError:
             print("** class doesn't exist **")
         new_instance = HBNBCommand.classes[arg_list[0]](**kw)
-
-        Base.metadata.create_all(storage.DBStorage__engine)
-
         new_instance.save()
         print(new_instance.id)
 
