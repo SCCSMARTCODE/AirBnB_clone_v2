@@ -1,35 +1,14 @@
 #!/usr/bin/env bash
-# working on my web server configuration
+# script that sets up web servers for the deployment of web_static
 sudo apt-get update
 sudo apt-get -y install nginx
 sudo ufw allow 'Nginx HTTP'
 
-
-if [ ! -e /data/ ]
-then
-	mkdir /data/
-fi
-
-if [ ! -e /data/web_static/ ]
-then
-        mkdir /data/web_static/
-fi
-
-if [ ! -e /data/web_static/releases/ ]
-then
-        mkdir /data/web_static/releases/
-fi
-
-if [ ! -e /data/web_static/shared/ ]
-then
-        mkdir /data/web_static/shared/
-fi
-
-if [ ! -e /data/web_static/releases/test/ ]
-then
-        mkdir /data/web_static/releases/test/
-fi
-
+sudo mkdir -p /data/
+sudo mkdir -p /data/web_static/
+sudo mkdir -p /data/web_static/releases/
+sudo mkdir -p /data/web_static/shared/
+sudo mkdir -p /data/web_static/releases/test/
 sudo touch /data/web_static/releases/test/index.html
 sudo echo "<html>
   <head>

@@ -5,9 +5,10 @@ archive to the web servers
 """
 from fabric.api import put, run, local, env
 from os import path
- 
+
 env.hosts = ['18.210.20.231', '18.208.119.93']
- 
+
+
 def do_deploy(archive_path):
     """Fabric script that distributes
     an archive to your web server"""
